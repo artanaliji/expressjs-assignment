@@ -6,8 +6,9 @@ dotenv.config({ path: path.join(__dirname, "../.env") });
 
 const envVarsSchema = Joi.object()
   .keys({
-    NODE_ENV: Joi.string().valid("production", "development", "test").required(),
+    NODE_ENV: Joi.string().valid("production", "development", "test").default("development"),
     PORT: Joi.number().default(8080),
+    REQUESTS_PER_MINUTE: Joi.number().default(10),
   })
   .unknown();
 
@@ -20,4 +21,5 @@ if (error) {
 module.exports = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
+  requestsPerMinute: envVars.REQUESTS_PER_MINUTE,
 };

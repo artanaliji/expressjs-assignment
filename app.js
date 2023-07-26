@@ -8,6 +8,7 @@ const httpStatus = require("http-status");
 const routes = require("./routes/");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./utils/ApiError");
+const { rateLimiter } = require("./middlewares/rateLimiter");
 
 const app = express();
 
@@ -26,6 +27,8 @@ app.use(cors());
 const swaggerSpec = swaggerJsDoc(swaggerOptions);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(rateLimiter);
 
 // v1 api routes
 app.use("/api", routes);
