@@ -1,1 +1,1 @@
-module.exports.testValidation = require("./test.validation");
+module.exports.userValidation = require("./user.validation");
